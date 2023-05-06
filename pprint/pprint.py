@@ -42,7 +42,7 @@ def _pprint(obj, stream=None, indent=1, width=80, depth=None):
             stream.write("  "*indent)
             _pprint(v, stream, indent+1, width, depth)
             stream.write(",\n")
-        stream.write("  "*indent+("]" if isinstance(obj, tuple) else ")"))
+        stream.write("  "*indent+("]" if isinstance(obj, list) else ")"))
 
     else:
         print(repr(obj), file=stream, end="")
