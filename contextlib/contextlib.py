@@ -11,7 +11,7 @@ import sys
 from collections import deque
 from functools import wraps
 
-from ucontextlib import AbstractContextManager, MethodType
+from ucontextlib import AbstractContextManager
 
 
 class AbstractAsyncContextManager(object):
@@ -158,6 +158,12 @@ def asynccontextmanager(func):
 
     return helper
 
+class MethodType:
+    def __init__(self, meth, obj):
+        self.meth = meth
+        self.obj = obj
+    def __call__(self, *a, **k):
+        getattr(self.obj, self.meth)(*a, **k)
 
 class _BaseExitStack:
     """A base class for ExitStack and AsyncExitStack."""
