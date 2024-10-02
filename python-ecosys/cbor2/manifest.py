@@ -1,3 +1,3 @@
-metadata(version="1.1.0", pypi="cbor2")
+metadata(version="1.1.1", pypi="cbor2")
 
 package("cbor2")
