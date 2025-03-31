@@ -11,3 +11,20 @@ Thus this code works with CPython checkers but has minimal impact on MicroPython
         ...
 """
 TYPE_CHECKING = const(False)
+
+# Stubs we need inline
+
+def assert_type(val, typ):
+    return val
+
+def cast(typ, val):
+    return val
+
+def no_type_check(fn):
+    return fn
+
+def overload(fn):
+    return fn
+
+def override(fn):
+    return fn
