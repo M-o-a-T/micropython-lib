@@ -15,7 +15,7 @@ def format_exception(etype, value, tb, limit=None, chain=True):
 
 def print_exception(t, e, tb, limit=None, file=None, chain=True):
     if file is None:
-        file = sys.stdout
+        file = sys.stderr
     sys.print_exception(e, file)
 
 

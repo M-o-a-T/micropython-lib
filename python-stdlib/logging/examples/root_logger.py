@@ -1,6 +1,6 @@
 import logging, sys
 
-logging.basicConfig(level=logging.DEBUG, stream=sys.stdout)
+logging.basicConfig(level=logging.DEBUG, stream=sys.stderr)
 for handler in logging.getLogger().handlers:
     handler.setFormatter(logging.Formatter("[%(levelname)s]:%(name)s:%(message)s"))
 logging.info("hello upy")
