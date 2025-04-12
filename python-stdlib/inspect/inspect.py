@@ -20,7 +20,7 @@ def isgeneratorfunction(obj):
 iscoroutinefunction = isgeneratorfunction
 
 def isgenerator(obj):
-    return isinstance(obj, type(lambda: (yield)()))
+    return isinstance(obj, type((lambda: (yield))()))
 
 iscoroutine = isgenerator
 
