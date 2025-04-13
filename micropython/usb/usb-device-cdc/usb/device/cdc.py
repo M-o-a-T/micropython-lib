@@ -351,8 +351,8 @@ class CDCInterface(io.IOBase, Interface):
 
     def write(self, buf):
         start = time.ticks_ms()
-        # use a memoryview to track partial writes
         mv = buf
+
         while True:
             # Keep pushing buf into _wb into it's all gone
             nbytes = self._wb.write(mv)
@@ -361,6 +361,8 @@ class CDCInterface(io.IOBase, Interface):
             if nbytes == len(mv):
                 return len(buf)  # Success
 
+            # if buf couldn't be fully written on the first attempt
+            # convert it to a memoryview to track partial writes
             if mv is buf:
                 mv = memoryview(buf)
             mv = mv[nbytes:]
