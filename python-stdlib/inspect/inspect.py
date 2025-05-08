@@ -1,5 +1,7 @@
 import sys
 
+_g = lambda: (yield)
+
 
 def getmembers(obj, pred=None):
     res = []
@@ -15,13 +17,16 @@ def isfunction(obj):
     return isinstance(obj, type(isfunction))
 
 def isgeneratorfunction(obj):
-    return isinstance(obj, type(lambda: (yield)))
+    return isinstance(obj, type(_g))
 
 iscoroutinefunction = isgeneratorfunction
 
 def isgenerator(obj):
-    return isinstance(obj, type((lambda: (yield))()))
+    return isinstance(obj, type((_g)()))
 
+
+# In MicroPython there's currently no way to distinguish between generators and coroutines.
+iscoroutinefunction = isgeneratorfunction
 iscoroutine = isgenerator
 
 
