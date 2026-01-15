@@ -1,13 +1,9 @@
+import sys
 
 
-
-def _pprint(obj, stream=None, indent=0):
-    if stream is None:
-        import sys
-        stream = sys.stdout
-
+def _pprint(obj, stream, indent=0, spc=""):
     if isinstance(obj, dict):
-        stream.write("{\n")
+        stream.write(spc+"{\n")
         for k, v in obj.items():
             stream.write("  "*indent)
             _pprint(k, stream, indent+1)
@@ -15,8 +11,19 @@ def _pprint(obj, stream=None, indent=0):
             _pprint(v, stream, indent+1)
             stream.write(",\n")
         stream.write("  "*indent+"}")
-    else:
-        print(repr(obj), file=stream, end="")
+        return
+
+    if isinstance(obj, (list,tuple)):
+        se = "[]" if isinstance(obj,list) else "()"
+        stream.write(spc+se[0]+"\n")
+        for k in obj:
+            stream.write("  "*indent)
+            _pprint(k, stream, indent+1, spc="  ")
+            stream.write(",\n")
+        stream.write("  "*indent+se[1])
+        return
+
+    print(repr(obj), file=stream, end="")
 
 
 def pformat(obj):
@@ -25,6 +32,6 @@ def pformat(obj):
     _pprint(obj, buf)
     return buf.getvalue()
 
-def pprint(obj, stream=None):
+def pprint(obj, stream=sys.stdout):
     _pprint(obj, stream)
-    print(file=stream)
+    stream.write("\n")
