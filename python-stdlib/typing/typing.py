@@ -28,3 +28,11 @@ def overload(fn):
 
 def override(fn):
     return fn
+
+class _Typed:
+    def __getitem__(self, _x):
+        return object
+    def __call__(self, _x):
+        return object
+Generic = _Typed()
+TypeVar = _Typed()
