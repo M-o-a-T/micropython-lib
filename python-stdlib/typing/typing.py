@@ -36,3 +36,4 @@ class _Typed:
         return object
 Generic = _Typed()
 TypeVar = _Typed()
+Protocol = object
